@@ -18,7 +18,7 @@
 
 /* Declaring all the structs */
 typedef struct Node node ;
-Í
+
 struct Node {
     char *item ;
     node *next ; // pointer to next node

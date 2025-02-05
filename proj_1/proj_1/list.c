@@ -27,7 +27,7 @@ list* create_list(void){
     choice = atoi(myInput); // convert the selection into an int for the switch statment
     for (int i = 0; i < choice; i++) // insert elements
     {
-        list* newPtr = malloc(sizeof(list)); // create node
+        add_to_list(startPtr, "sillyTest");
     }
 
     if (!isEmpty(startPtr)) // if list is not empty
@@ -50,36 +50,29 @@ int add_to_list ( list* ll , char* item )
 
    if (newPtr != NULL) { // is space available
       // place values in node
-       strcpy(newPtr->item, item);
+       newPtr->item = strdup(item);
        newPtr->next = NULL; // node does not link to another node YET
 
-       list* previousPtr = NULL;
-       list* currentPtr = (list*) *ll;
-
-      // loop to find the correct location in the list
+       node* previousPtr = NULL;
+       node* currentPtr = (list **) ll;
+       
+      // loop to find the end of the list
        // 'index' through the struct-linked-list by looking at the nextPtr spot for NULL
-       // the linked-list is sorted by pet-name-alphebetically
-       // REFERENCE: https://www.geeksforgeeks.org/strcmp-in-c-cpp/
-    while (currentPtr != NULL && (strcmp(sillyName,currentPtr->name) > 0) )
+    while (currentPtr != NULL )
       {
          previousPtr = currentPtr; // walk to ...
-         currentPtr = currentPtr->nextPtr; // ... next node
+         currentPtr = currentPtr->next; // ... next node
       }
       
-      if (previousPtr == NULL)
-      { // insert new node at beginning of list
-         newPtr->nextPtr = *sillyPtr;
-         *sillyPtr = newPtr;
-      }
-      else
-      { // insert new node between previousPtr and currentPtr
-         previousPtr->nextPtr = newPtr;
-         newPtr->nextPtr = currentPtr;
-      }
-   }
+     // insert new node between previousPtr and currentPtr
+    previousPtr->next = newPtr;
+    newPtr->next = currentPtr;
+     }
    else {
-      printf("%s not inserted. No memory available.\n", sillyName);
+      printf("%s not inserted. No memory available.\n", item);
+       return 1;
    }
+    return 0;
 } // end of insert()
 
 
