@@ -19,8 +19,11 @@ list* create_list(void){
     char myInput[SIZE] = { '\0'}; //char entered by user
     unsigned int choice = 0; // user's menu choice variable, int for switch statement
     
-    list* startPtr = NULL; // initially there are no nodes
-    
+    list* startPtr = malloc(sizeof(list));
+    if (startPtr == NULL) { // initially there are no nodes
+        puts("Memory allocation failed for list.");
+        exit(1);
+    }
     printMessage(prompt1); //give the user instructions
     
     inputStr(myInput); // get input from user with fgets cmd
@@ -48,30 +51,31 @@ int add_to_list ( list* ll , char* item )
 {
     node* newPtr = (node*)malloc(sizeof(node)); // create node
 
-   if (newPtr != NULL) { // is space available
+   if(newPtr == NULL){
+          printf("%s not inserted. No memory available.\n", item);
+           return 1;
+    }
+   else { // is space available
       // place values in node
        newPtr->item = strdup(item);
        newPtr->next = NULL; // node does not link to another node YET
 
-       node* previousPtr = NULL;
-       node* currentPtr = (list **) ll;
-       
-      // loop to find the end of the list
+       if (ll->head == NULL) {
+           ll->head = newPtr;
+           return 0;
+       }
+      // otherwise loop to find the end of the list
        // 'index' through the struct-linked-list by looking at the nextPtr spot for NULL
-    while (currentPtr != NULL )
+       node* currentPtr = ll->head;
+       while (currentPtr != NULL )
       {
-         previousPtr = currentPtr; // walk to ...
          currentPtr = currentPtr->next; // ... next node
       }
       
-     // insert new node between previousPtr and currentPtr
-    previousPtr->next = newPtr;
-    newPtr->next = currentPtr;
+     // insert new node
+       currentPtr->next = newPtr;
      }
-   else {
-      printf("%s not inserted. No memory available.\n", item);
-       return 1;
-   }
+   
     return 0;
 } // end of insert()
 
