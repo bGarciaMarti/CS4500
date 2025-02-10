@@ -24,6 +24,7 @@ list* create_list(void){
         puts("Memory allocation failed for list.");
         exit(1);
     }
+    startPtr->head = NULL; // initialize the head to NULL
     printMessage(prompt1); //give the user instructions
     
     inputStr(myInput); // get input from user with fgets cmd
@@ -46,7 +47,6 @@ list* create_list(void){
 // insert new values into the list in sorted order.
 // start at the headerPtr, and 'index' through the structs until the correct struct spot is found
 // ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
-//void insert(petListPtr *sillyPtr, char sillyName[SIZE], int sillyAge)
 int add_to_list ( list* ll , char* item )
 {
     node* newPtr = (node*)malloc(sizeof(node)); // create node
@@ -55,7 +55,7 @@ int add_to_list ( list* ll , char* item )
           printf("%s not inserted. No memory available.\n", item);
            return 1;
     }
-   else { // is space available
+   // else is space available
       // place values in node
        newPtr->item = strdup(item);
        newPtr->next = NULL; // node does not link to another node YET
@@ -67,17 +67,17 @@ int add_to_list ( list* ll , char* item )
       // otherwise loop to find the end of the list
        // 'index' through the struct-linked-list by looking at the nextPtr spot for NULL
        node* currentPtr = ll->head;
-       while (currentPtr != NULL )
+       while (currentPtr->next != NULL )
       {
          currentPtr = currentPtr->next; // ... next node
       }
-      
+
      // insert new node
        currentPtr->next = newPtr;
-     }
+     
    
     return 0;
-} // end of insert()
+} // end of add_to_list()
 
 
 
