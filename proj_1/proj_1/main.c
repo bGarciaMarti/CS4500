@@ -12,7 +12,14 @@
 int main(void)
 {
     
-    create_list();
+    list* listPtr = malloc(sizeof(list));
+    
+    listPtr = create_list();
+    
+    print_list(listPtr);
+    
+    flush_list(listPtr);
+    print_list(listPtr);
     
     puts("\n\nEnding Program\nAdios~\n");
     return 0;

@@ -14,6 +14,7 @@ const char * prompt1 = "How many elements do you want in this list?\n";
 
 /* Allocate space for a new list and set its head to NULL.
  ∗ Returns the created list if successful, NULL otherwise. */
+// ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
 list* create_list(void){
 
     char myInput[SIZE] = { '\0'}; //char entered by user
@@ -43,9 +44,9 @@ list* create_list(void){
     }
 } // end of create_list
 
-// ~~~ // insert alrogithm // ~~~ //
-// insert new values into the list in sorted order.
-// start at the headerPtr, and 'index' through the structs until the correct struct spot is found
+/* Allocates a new node and copies the string from item to this node
+∗ (use malloc , strlen , and strncpy; or try strdup). Adds this new node
+∗ to end of the list ll . Returns 0 if successful , non−zero otherwise. */
 // ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
 int add_to_list ( list* ll , char* item )
 {
@@ -67,22 +68,64 @@ int add_to_list ( list* ll , char* item )
       // otherwise loop to find the end of the list
        // 'index' through the struct-linked-list by looking at the nextPtr spot for NULL
        node* currentPtr = ll->head;
-       while (currentPtr->next != NULL )
-      {
-         currentPtr = currentPtr->next; // ... next node
+       while (currentPtr->next != NULL)
+      {currentPtr = currentPtr->next; // ... next node
       }
-
-     // insert new node
-       currentPtr->next = newPtr;
+       currentPtr->next = newPtr;   // insert new node
      
-   
     return 0;
 } // end of add_to_list()
 
+/* Removes the head of the list ll(and move the head of ll to the next node
+23 ∗ in the list, extracts the strings to read in the head , and returns a
+24 ∗ pointer to this string. Also frees the removed head node . */
+// ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
+char* remove_from_list( list *ll){
+    node* currentPtr = ll->head;
+    list* tempPtr = ll; // hold onto node being removed
+    ll->head = currentPtr->next; // de-thread the node
+    free(tempPtr); // free the de-threaded node
+    
+    return (currentPtr->item);
+    
+} // end of remove_from_list
+
+/* Print severy string in each node of the list ll , with a new line
+28 ∗ character at the end of each string */
+void print_list( list *ll ){
+    node* currentPtr = ll->head;
+    // if list is empty
+    if (isEmpty(ll)) {
+       puts("The list is empty.\n");
+        return;
+    }
+    else {
+       puts("The list as is:");
+
+       // while not the end of the list
+       while (currentPtr != NULL) {
+          printf("item: %s --> \n", currentPtr->item);
+          currentPtr = currentPtr->next;
+       }
+       puts("NULL\n");
+    }
+    return;
+} //print_list
 
 
-
-
+/* Flushes (clears) the entire list and re−initializes the list. The passed
+∗ pointer ll should still point to a valid, empty list when this function
+∗ returns. Any memory allocated to store nodes in the list should be freed.
+*/
+void flush_list (list *ll){
+    node* currentPtr = ll->head;
+    
+    // while not the end of the list
+    while (currentPtr != NULL) {
+        remove_from_list(ll);
+        currentPtr = currentPtr->next;
+    }
+} // end of flush_list
 
 
 
