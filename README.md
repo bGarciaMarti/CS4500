@@ -14,9 +14,10 @@ VIRTUAL MACHINE (VM) INFORMATION:
 
 NAME OF VIRTUAL MACHINE (VM):
 USENAME:
-PASSWORD:
+PASSWORD: 1qaz2wsx3edc$RFV
 Describe where the files can be found.
 Describe each file and the purpose it serves.
+list_test.c holds the main. list.c holds the written out functions. list.h holds the function declarations and struct definitions
 Provide any special instructions to access or run your program.
 ROOT PASSWORD:
 ==============
