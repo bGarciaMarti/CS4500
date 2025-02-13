@@ -76,7 +76,7 @@ int add_to_list ( list* ll , char* item )
     return 0;
 } // end of add_to_list()
 
-/* Removes the head of the list ll(and move the head of ll to the next node
+/* Removes the head of the list ll and move the head of ll to the next node
 23 ∗ in the list, extracts the strings to read in the head , and returns a
 24 ∗ pointer to this string. Also frees the removed head node . */
 // ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
@@ -122,12 +122,17 @@ void flush_list (list *ll){
     
     // while not the end of the list
     while (currentPtr != NULL) {
-        remove_from_list(ll);
+        remove_from_list(ll); // Removes the head of the list ll
+                             // and move the head of ll to the next node
         currentPtr = currentPtr->next;
     }
 } // end of flush_list
 
-
+/* De−allocates all data for the list. Ensure all memory allocated for list
+∗ ll is freed, including any allocated strings and list ll itself. */
+void free_list( list **lls){
+    
+} // end of free_list
 
 
 

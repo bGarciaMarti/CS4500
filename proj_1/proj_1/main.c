@@ -17,9 +17,11 @@ int main(void)
     listPtr = create_list();
     
     print_list(listPtr);
-    
+    /*
+     I don't work :C
     flush_list(listPtr);
     print_list(listPtr);
+     */
     
     puts("\n\nEnding Program\nAdios~\n");
     return 0;
