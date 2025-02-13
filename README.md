@@ -12,9 +12,9 @@ We have neither given nor received unauthorized assistance on this work.
 VIRTUAL MACHINE (VM) INFORMATION:
 =================================
 
-NAME OF VIRTUAL MACHINE (VM):
+NAME OF VIRTUAL MACHINE (VM): BGarcia_funMachine
 ==========
-USENAME: BGarcia
+USENAME: bdenny
 ==========
 PASSWORD: 1qaz2wsx3edc$RFV
 ==========
