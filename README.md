@@ -1,13 +1,14 @@
-NAME OF PROJECT:
+NAME OF PROJECT: Operating Systems Project 1
+C Programming and Makefile
 ================
 
-MEMBERS:
+MEMBERS: Brenardo Garcia Marti
 ========
 
 STATEMENT:
 ==========
-
 We have neither given nor received unauthorized assistance on this work.
+
 VIRTUAL MACHINE (VM) INFORMATION:
 =================================
 
@@ -22,6 +23,8 @@ ROOT PASSWORD:
 
 PROBLEM DESCRIPTION AND REMEDIATION:
 ====================================
+For the purposes of easier communication and screenshot inclusion, a Troubleshooting google doc was kept and used to record problems and remediation.
+https://docs.google.com/document/d/1NiBPZ_myZz7C-yKNanYZLu3V-8EPjQZ1m75JIH8togE/edit?tab=t.0
 
   PART 0: SET UP
   ==============
