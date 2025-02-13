@@ -12,11 +12,17 @@ We have neither given nor received unauthorized assistance on this work.
 VIRTUAL MACHINE (VM) INFORMATION:
 =================================
 
-NAME OF VIRTUAL MACHINE (VM): ========== BGarcia_funMachine
+NAME OF VIRTUAL MACHINE (VM):
 ==========
-USENAME:  ========== bdenny
+BGarcia_funMachine
 ==========
-PASSWORD: ========== 1qaz2wsx3edc$RFV
+USENAME:  
+========== 
+bdenny
+==========
+PASSWORD: 
+========== 
+1qaz2wsx3edc$RFV
 ==========
 Describe where the files can be found.
 Describe each file and the purpose it serves.
