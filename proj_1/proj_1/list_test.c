@@ -20,8 +20,11 @@ int main(void)
     remove_from_list(listPtr);
     print_list(listPtr);
     
-    remove_from_list(listPtr);
+    remove_from_list(listPtr); /* I encounter an error:
+                                proj_1(32895,0x1000ebe00) malloc: *** error for object 0x10050cce0: pointer being freed was not allocated
+                                */
     print_list(listPtr);
+    
     
     /*
      I don't work :C

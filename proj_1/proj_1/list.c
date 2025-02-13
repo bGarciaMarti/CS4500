@@ -85,7 +85,6 @@ char* remove_from_list( list *ll){
     list* tempPtr = ll; // hold onto node being removed
     ll->head = currentPtr->next; // de-thread the node
     free(tempPtr); // free the de-threaded node
-    
     return (currentPtr->item);
     
 } // end of remove_from_list
