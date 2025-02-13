@@ -27,7 +27,7 @@ PASSWORD:
 ==========
 Describe where the files can be found.
 ==========
-Home/Desktop/CS 4500 Proj 1
+Home/Desktop/CS 4500 Proj 1/proj_1/proj_1
 
 Describe each file and the purpose it serves.
 ==========
