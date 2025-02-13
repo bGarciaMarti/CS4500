@@ -18,7 +18,7 @@ BGarcia_funMachine
 
 USENAME:  
 ==========
-bdenny
+bdenny, Bren Garcia Marti
 
 PASSWORD: 
 ========== 
@@ -26,8 +26,13 @@ PASSWORD:
 
 ==========
 Describe where the files can be found.
+==========
+Home/Desktop/CS 4500 Proj 1
+
 Describe each file and the purpose it serves.
+==========
 list_test.c holds the main. list.c holds the written out functions. list.h holds the function declarations and struct definitions
+
 Provide any special instructions to access or run your program.
 ROOT PASSWORD:
 ==============
