@@ -22,6 +22,8 @@ ROOT PASSWORD:
 
 PROBLEM DESCRIPTION AND REMEDIATION:
 ====================================
+For the purposes of easier communication and screenshot inclusion, a Troubleshooting google doc was kept and used to record problems and remediation.
+https://docs.google.com/document/d/1NiBPZ_myZz7C-yKNanYZLu3V-8EPjQZ1m75JIH8togE/edit?tab=t.0
 
   PART 0: SET UP
   ==============
