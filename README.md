@@ -15,14 +15,15 @@ VIRTUAL MACHINE (VM) INFORMATION:
 NAME OF VIRTUAL MACHINE (VM):
 ==========
 BGarcia_funMachine
-==========
+
 USENAME:  
-========== 
-bdenny
 ==========
+bdenny
+
 PASSWORD: 
 ========== 
 1qaz2wsx3edc$RFV
+
 ==========
 Describe where the files can be found.
 Describe each file and the purpose it serves.
