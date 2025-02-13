@@ -1,13 +1,14 @@
 NAME OF PROJECT:
 ================
-
+Operating Systems Project 1
+C Programming and Makefile
 MEMBERS:
 ========
-
+Brenardo Garcia Marti
 STATEMENT:
 ==========
-
 We have neither given nor received unauthorized assistance on this work.
+
 VIRTUAL MACHINE (VM) INFORMATION:
 =================================
 
