@@ -15,8 +15,14 @@ int main(void)
     list* listPtr = malloc(sizeof(list));
     
     listPtr = create_list();
-    
     print_list(listPtr);
+    
+    remove_from_list(listPtr);
+    print_list(listPtr);
+    
+    remove_from_list(listPtr);
+    print_list(listPtr);
+    
     /*
      I don't work :C
     flush_list(listPtr);
