@@ -1,10 +1,10 @@
-NAME OF PROJECT:
-================
-Operating Systems Project 1
+NAME OF PROJECT: Operating Systems Project 1
 C Programming and Makefile
-MEMBERS:
+================
+
+MEMBERS: Brenardo Garcia Marti
 ========
-Brenardo Garcia Marti
+
 STATEMENT:
 ==========
 We have neither given nor received unauthorized assistance on this work.
