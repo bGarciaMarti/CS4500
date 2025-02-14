@@ -128,6 +128,8 @@ void flush_list (list *ll){
     while (currentPtr != NULL) {
         char *item = remove_from_list(ll); // Removes the head of the list ll
         free(item);
+        // because remove_from_list always replaces the head
+        // we can continue to cycle through without moving to the currentPtr-> next
     }
     // make sure the *ll pointer still points to a valid list
     ll->head = NULL;
@@ -136,7 +138,7 @@ void flush_list (list *ll){
 /* De−allocates all data for the list. Ensure all memory allocated for list
 ∗ ll is freed, including any allocated strings and list ll itself. */
 void free_list( list **ll){
-    if(ll != NULL || *ll != NULL){// if the list is not already NULL
+    if(ll != NULL || *ll != NULL){// if the list and the listPtr is not already NULL
         //clear all the nodes
         flush_list(*ll);
         free(*ll); // free the memory allocated for list
