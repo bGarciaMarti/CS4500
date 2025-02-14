@@ -81,12 +81,17 @@ int add_to_list ( list* ll , char* item )
 24 ∗ pointer to this string. Also frees the removed head node . */
 // ~~~ // ~~~ // ~~~ // ~~~ // ~~~ //
 char* remove_from_list( list *ll){
-    node* currentPtr = ll->head;
-    list* tempPtr = ll; // hold onto node being removed
-    ll->head = currentPtr->next; // de-thread the node
-    free(tempPtr); // free the de-threaded node
-    return (currentPtr->item);
-    
+    // if the list is not empty
+    if (ll->head != NULL) {
+        node* currentPtr = ll->head;
+        list* tempPtr = ll; // hold onto node being removed
+        ll->head = currentPtr->next; // de-thread the node
+        free(tempPtr); // free the de-threaded node
+        return (currentPtr->item);
+    }
+    else { // the list is empty
+        return NULL;
+    } //
 } // end of remove_from_list
 
 /* Print severy string in each node of the list ll , with a new line
@@ -121,19 +126,26 @@ void flush_list (list *ll){
     
     // while not the end of the list
     while (currentPtr != NULL) {
-        remove_from_list(ll); // Removes the head of the list ll
-                             // and move the head of ll to the next node
-        currentPtr = currentPtr->next;
+        char *item = remove_from_list(ll); // Removes the head of the list ll
+        free(item);
     }
+    // make sure the *ll pointer still points to a valid list
+    ll->head = NULL;
 } // end of flush_list
 
 /* De−allocates all data for the list. Ensure all memory allocated for list
 ∗ ll is freed, including any allocated strings and list ll itself. */
-void free_list( list **lls){
-    
+void free_list( list **ll){
+    if(ll != NULL || *ll != NULL){// if the list is not already NULL
+        //clear all the nodes
+        flush_list(*ll);
+        free(*ll); // free the memory allocated for list
+        *ll = NULL;
+    }
+    else {
+        return;
+    }
 } // end of free_list
-
-
 
 
 // ~~~ // printMessage alrogithm // ~~~ //
