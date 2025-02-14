@@ -24,7 +24,6 @@ PASSWORD:
 ========== 
 1qaz2wsx3edc$RFV
 
-==========
 Describe where the files can be found.
 ==========
 Home/Desktop/PROJ1
