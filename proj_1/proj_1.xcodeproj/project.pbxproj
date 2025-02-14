@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DBB38AD62D5DB03500971608 /* list_test.c in Sources */ = {isa = PBXBuildFile; fileRef = DBB38AD52D5DB03500971608 /* list_test.c */; };
 		DBC5ED592D4A9B8300EF25F2 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = DBC5ED572D4A9B8300EF25F2 /* list.c */; };
+		DBCF87792D5FD41D0083370A /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = DBCF87782D5FD41D0083370A /* makefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		DBC5ED442D49C27B00EF25F2 /* proj_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = proj_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC5ED572D4A9B8300EF25F2 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
 		DBC5ED582D4A9B8300EF25F2 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		DBCF87782D5FD41D0083370A /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				DBC5ED572D4A9B8300EF25F2 /* list.c */,
 				DBC5ED582D4A9B8300EF25F2 /* list.h */,
 				DBB38AD52D5DB03500971608 /* list_test.c */,
+				DBCF87782D5FD41D0083370A /* makefile */,
 			);
 			path = proj_1;
 			sourceTree = "<group>";
@@ -126,6 +129,7 @@
 			files = (
 				DBB38AD62D5DB03500971608 /* list_test.c in Sources */,
 				DBC5ED592D4A9B8300EF25F2 /* list.c in Sources */,
+				DBCF87792D5FD41D0083370A /* makefile in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

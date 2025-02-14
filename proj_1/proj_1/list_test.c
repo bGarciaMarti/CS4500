@@ -27,11 +27,11 @@ int main(void)
     */
     
     /*
-     I don't work :C
+     the flush and free list don't work because they rely on the remove_from_list() fun :C
     flush_list(listPtr);
     print_list(listPtr);
      */
     
-    puts("\n\nEnding Program\nAdios~\n");
+    puts("\nEnding Program\nAdios~\n");
     return 0;
 } // end main
