@@ -90,7 +90,7 @@ char* remove_from_list( list *ll){
         return (sillyItem);
     }
     else { // the list is empty
-        puts("The list is empty.");
+        puts("The list is empty.\n");
         return NULL;
     } //
 } // end of remove_from_list
@@ -98,15 +98,19 @@ char* remove_from_list( list *ll){
 /* Print severy string in each node of the list ll , with a new line
 28 ∗ character at the end of each string */
 void print_list( list *ll ){
-    node* currentPtr = ll->head;
+    
     // if list is empty
     if (isEmpty(ll)) {
        puts("The list is empty.\n");
         return;
     }
+    else if (ll == NULL) { // if the list doesn't exist
+           puts("The list does exsist.\n");
+            return;
+        }
     else {
        puts("The list as is:");
-
+        node* currentPtr = ll->head;
        // while not the end of the list
        while (currentPtr != NULL) {
           printf("item: %s --> \n", currentPtr->item);
@@ -123,10 +127,11 @@ void print_list( list *ll ){
 ∗ returns. Any memory allocated to store nodes in the list should be freed.
 */
 void flush_list (list *ll){
-    node* currentPtr = ll->head;
+    //node* currentPtr = ll->head;
     
     // while not the end of the list
-    while (currentPtr != NULL) {
+    //while (currentPtr != NULL) {
+    while (ll->head != NULL) {
         char *item = remove_from_list(ll); // Removes the head of the list ll
         free(item);
         // because remove_from_list always replaces the head
