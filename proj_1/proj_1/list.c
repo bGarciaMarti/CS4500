@@ -84,12 +84,13 @@ char* remove_from_list( list *ll){
     // if the list is not empty
     if (ll->head != NULL) {
         node* currentPtr = ll->head;
-        list* tempPtr = ll; // hold onto node being removed
+        char *sillyItem = currentPtr->item; // hold onto node being removed
         ll->head = currentPtr->next; // de-thread the node
-        free(tempPtr); // free the de-threaded node
-        return (currentPtr->item);
+        free(currentPtr); // free the de-threaded node
+        return (sillyItem);
     }
     else { // the list is empty
+        puts("The list is empty.");
         return NULL;
     } //
 } // end of remove_from_list
