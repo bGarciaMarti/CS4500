@@ -26,6 +26,9 @@ int main(void)
     flush_list(listPtr);
     print_list(listPtr);
     
+    add_to_list(listPtr, "funTest");
+    print_list(listPtr);
+    
     free_list(&listPtr);
     print_list(listPtr);
     
