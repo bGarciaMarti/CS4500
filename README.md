@@ -26,7 +26,7 @@ PASSWORD:
 
 Describe where the files can be found.
 ==========
-Home/Desktop/PROJ1
+Home/Desktop/Proj1
 
 Describe each file and the purpose it serves.
 ==========
