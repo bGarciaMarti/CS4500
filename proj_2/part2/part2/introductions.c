@@ -10,20 +10,22 @@
 
 int print_self_init_module(void) {
 
+    struct task_struct *task; //synonym for structs
+
     printk(KERN_INFO "Process name: %s\n", current->comm);
     
     printk(KERN_INFO "Process id/pid: %d\n", current->pid);
     
     printk(KERN_INFO "Process State:");
-    if (current->state == -1)
+    if (current->__state == -1)
         printk("TASK IS UNABLE TO RUN\n");
-    else if (current->state == 0)
+    else if (current->__state == 0)
         printk("TASK_RUNNING\n");
-    else if (current->state == 1)
+    else if (current->__state == 1)
         printk("TASK_INTERRUPTIBLE\n");
-    else if (current->state == 2)
+    else if (current->__state == 2)
         printk("TASK_UNINTERRUPTIBLE\n");
-    else if (current->state == 4)
+    else if (current->__state == 4)
         printk("TASK_STOPPED\n");
     else
         printk("TASK_BLOCKED\n");
