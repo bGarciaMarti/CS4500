@@ -1,16 +1,14 @@
 //
-//  main.c
+//  introcutions.c
 //  part2
 //
-//  Created by Secondary on 3/5/25.
+//  Created by Brenardo Garcia Marti on 3/5/25.
 //
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/sched/signal.h>
 
 int print_self_init_module(void) {
-    
-    // struct task_struct *task;
 
     printk(KERN_INFO "Process name: %s\n", current->comm);
     
@@ -25,12 +23,11 @@ int print_self_init_module(void) {
         printk("TASK_INTERRUPTIBLE\n");
     else if (current->state == 2)
         printk("TASK_UNINTERRUPTIBLE\n");
-    else if (current->state == -4)
+    else if (current->state == 4)
         printk("TASK_STOPPED\n");
     else
-        printk("TASK_BLOCKED\n");s
-    }
-     */
+        printk("TASK_BLOCKED\n");
+
 	return 0;
 } // end of print_self_init_module
 
