@@ -10,13 +10,14 @@
 
 int print_self_init_module(void) {
     
-    struct task_struct *task;
+    struct task_struct *current = current_task();
 
     printk(KERN_INFO "Process name: %s\n", current->comm);
     
     printk(KERN_INFO "Process id/pid: %d\n", current->pid);
-    printk(KERN_INFO "Process State: ");
-    switch(current->state)
+    
+    printk(KERN_INFO "Process State: %ld", current->stat);
+    /* switch(current->stat)
     {
       case -1 :
         printk("TASK IS UNABLE TO RUN\n");
@@ -46,6 +47,7 @@ int print_self_init_module(void) {
         printk("TASK_BLOCKED\n");
         break;
     }
+     */
 	return 0;
 } // end of print_self_init_module
 
