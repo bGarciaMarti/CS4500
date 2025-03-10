@@ -97,3 +97,15 @@ bgarcia@bgarcia-virtual-machine:~/Desktop/proj2/part3$ sudo dmesg -T | tail
 [Mon Mar 10 00:08:56 2025] parent process name: systemd id/pid: 1 state: 1
 
 bgarcia@bgarcia-virtual-machine:~/Desktop/proj2/part3$ sudo insmod rmmod pleasantries.ko
+```
+PART 4: Kernel Modules and System Calls
+  =====================================
+1. What’s the difference between a kernel module and a system call?
+
+A system call is an interface with an operating system's services that allows user-level processes to request services from a kernel. I think of them as the owl/middle-man between a library's functions and the operating system's hardware/memory performing the requested action.
+
+Where as kernel modules are pieces of code that can add aditional function to a machine without said machine needing to be rebooted, nor the kernel being rebuilt or reinstalled every time new functionality is added. These codes are not loaded directly to the kernel code, but rather are loaded on demand. Which makes adding functionality codes more convienient and thus easier to write, debebug, use, similar.
+
+2. This article is over 20 years old. If you try this example from the article, does it still
+work? Use your own words to explain why you think this may be a good (or bad)
+thing.
