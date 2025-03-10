@@ -30,6 +30,23 @@ int print_self_init_module(void) {
     else
         printk("TASK_BLOCKED\n");
 
+    printk(KERN_INFO "The parent processes until init:");
+    for (task = current; task != &init_task; task = task->parent) {
+      printk(KERN_INFO "name: %s, id/pid: %s state: ", task->comm , task->pid);
+        if (task->__state == -1)
+            printk("TASK IS UNABLE TO RUN\n");
+        else if (task->__state == 0)
+            printk("TASK_RUNNING\n");
+        else if (task->__state == 1)
+            printk("TASK_INTERRUPTIBLE\n");
+        else if (task->__state == 2)
+            printk("TASK_UNINTERRUPTIBLE\n");
+        else if (task->__state == 4)
+            printk("TASK_STOPPED\n");
+        else
+            printk("TASK_BLOCKED\n");
+    }
+    
 	return 0;
 } // end of print_self_init_module
 
