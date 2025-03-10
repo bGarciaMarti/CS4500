@@ -8,11 +8,17 @@
 #include <linux/kernel.h>
 #include <linux/sched/signal.h>
 
-int print_other_init_module(int pid) {
+static int mypid = 9999;
+
+module_param(mypid, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP); //
+
+int print_other_init_module(void) {
 
     struct task_struct *task; //synonym for structs
     
-    task = pid_task(find_vpid(pid), PIDTYPE_PID); // pid_task(find_vpid(...), PIDTYPE_PID)
+    printk(KERN_INFO "The given id/pid is %d\n", mypid);
+
+    task = pid_task(find_vpid(mypid), PIDTYPE_PID); // pid_task(find_vpid(...), PIDTYPE_PID)
     if (task != NULL) {
         
         printk(KERN_INFO "Process name: %s\n", current->comm);
@@ -38,7 +44,7 @@ int print_other_init_module(int pid) {
         }
     }
     else {
-        printk(KERN_INFO "No process matches id/pid: %d \n", pid);
+        printk(KERN_INFO "No process matches id/pid: %d \n", mypid);
     }
     
 	return 0;
