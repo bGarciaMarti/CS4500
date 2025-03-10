@@ -16,32 +16,22 @@ int print_self_init_module(void) {
     
     printk(KERN_INFO "Process id/pid: %d\n", current->pid);
     
-    printk(KERN_INFO "Process State: ");
-        process_state_name(current->__state);
+    printk(KERN_INFO "Process State:");
+    if (current->__state == -1)
+        printk("TASK IS UNABLE TO RUN\n");
+    else if (current->__state == 0)
+        printk("TASK_RUNNING\n");
+    else if (current->__state == 1)
+        printk("TASK_INTERRUPTIBLE\n");
+    else if (current->__state == 2)
+        printk("TASK_UNINTERRUPTIBLE\n");
+    else if (current->__state == 4)
+        printk("TASK_STOPPED\n");
+    else
+        printk("TASK_BLOCKED\n");
 
-    printk(KERN_INFO "The parent processes until init:");
-    for (task = current; task != &init_task; task = task->parent) {
-      printk(KERN_INFO "name: %s, id/pid: %s state: ", task->comm , task->pid);
-        process_state_name(task->__state);
-    }
-    
 	return 0;
 } // end of print_self_init_module
-
-void process_state_name (long silly_state) {
-    if (silly_state == -1)
-        return("TASK IS UNABLE TO RUN\n");
-    else if (silly_state == 0)
-        return("TASK_RUNNING\n");
-    else if (silly_state == 1)
-        return("TASK_INTERRUPTIBLE\n");
-    else if (silly_state == 2)
-        return("TASK_UNINTERRUPTIBLE\n");
-    else if (silly_state == 4)
-        return("TASK_STOPPED\n");
-    else
-        return("TASK_BLOCKED\n");
-} // end of process_state_name
 
 void print_self_cleanup_module(void) {
     printk(KERN_INFO "Cleaning Up.\n");
