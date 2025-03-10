@@ -65,3 +65,34 @@ Yes, I did notice that the consol maked and ran, but didn't display the state. T
 
 PART 3: Create a print_other kernel module
   ================================
+1. Please refer to the lecture slides which ones should be used
+
+2. I used the ```pgrep bash``` command to get the PID 5889
+
+3. When using the terminal to load the .ko file into the kernel, I included an arguement to give the variable mypid a pid. ```sudo insmod pleasantries.ko mypid=5889```. In the c code, the variable mypid is loaded by the module_param() function in the following line: ```(mypid, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);``` This allows the variable to be used in the int print_other_init_module(void) function without any other alterations.
+
+```bgarcia@bgarcia-virtual-machine:~/Desktop/proj2/part3$ sudo insmod pleasantries.ko mypid=5889
+
+bgarcia@bgarcia-virtual-machine:~/Desktop/proj2/part3$ sudo dmesg -T | tail
+
+[Mon Mar 10 00:08:56 2025] Process id/pid: 5912
+
+[Mon Mar 10 00:08:56 2025] Process State: TASK_RUNNING
+
+[Mon Mar 10 00:08:56 2025] The parent processes until init:
+
+[Mon Mar 10 00:08:56 2025] parent process name: insmod id/pid: 5912 state: 0
+
+[Mon Mar 10 00:08:56 2025] parent process name: sudo id/pid: 5911 state: 1
+
+[Mon Mar 10 00:08:56 2025] parent process name: sudo id/pid: 5910 state: 1
+
+[Mon Mar 10 00:08:56 2025] parent process name: bash id/pid: 5889 state: 1
+
+[Mon Mar 10 00:08:56 2025] parent process name: gnome-terminal- id/pid: 5871 state: 1
+
+[Mon Mar 10 00:08:56 2025] parent process name: systemd id/pid: 1438 state: 1
+
+[Mon Mar 10 00:08:56 2025] parent process name: systemd id/pid: 1 state: 1
+
+bgarcia@bgarcia-virtual-machine:~/Desktop/proj2/part3$ sudo insmod rmmod pleasantries.ko```
