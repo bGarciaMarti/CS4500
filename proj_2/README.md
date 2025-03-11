@@ -106,6 +106,8 @@ A system call is an interface with an operating system's services that allows us
 
 Where as kernel modules are pieces of code that can add aditional function to a machine without said machine needing to be rebooted, nor the kernel being rebuilt or reinstalled every time new functionality is added. These codes are not loaded directly to the kernel code, but rather are loaded on demand. Which makes adding functionality codes more convienient and thus easier to write, debebug, use, similar.
 
-2. This article is over 20 years old. If you try this example from the article, does it still
-work? Use your own words to explain why you think this may be a good (or bad)
-thing.
+2. This article is over 20 years old. If you try this example from the article, does it still work? Use your own words to explain why you think this may be a good (or bad) thing.
+
+It throws two errors, saying that it expects a semicolon between the asmlinkage and the int in the declaration of functions with the return variable type ```asmlinkage int (*original_sys_exit)(int);```
+
+While I can conceptualize that a new way of implementing operating systems creates more secure systems (in that the ways a previous system was exploited for it's proliferated weakness are left behind), I see this incapatibility as a mostly bad thing. Computers and their code are a unique engineering that improves at a profoundly rapid speed; so rapid that it encourages waste. Wasted time learning out of date information, or wasted time trying to parse what is secure and what isn't. Computers as prone to being unable to be backwards compatible, especailly when compared to electrical and mechanical and similar engineerings.
