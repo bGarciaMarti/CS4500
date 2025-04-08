@@ -49,6 +49,6 @@ Lessons Learned
 PROBLEM DESCRIPTION AND REMEDIATION:
 ====================================
 For the purposes of easier communication and screenshot inclusion, a Troubleshooting google doc was kept and used to record problems and remediation. Screenshots of all the results/outputs can be found on this document.
-https://docs.google.com/document/d/1ubMQmqvIrXIotmqOoT8qYg8bLqUPCHkyElj1SV9Moa0/edit?usp=sharing
+https://docs.google.com/document/d/1Z3e5j0aXnWoBNC6eDiTrmD3__0sKfik9urZWScgLnEE/edit?usp=sharing
 
 
