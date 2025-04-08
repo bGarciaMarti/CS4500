@@ -30,7 +30,7 @@ Home/Desktop/Proj3
 
 Description of Project: 2 – 3 Sentences
 ==========
-
+Task 1 "This program will read the strings from "strings.txt", distribute the task among 10 threads, and print the total number of substrings found."
 
 Pseudocode: This can be a picture, drawing, sketch, or digitally produced. For example, if you
 hand-wrote it on a sheet of paper, convert it into and image and paste it here. If you typed it
