@@ -19,8 +19,6 @@
 #define PATH_SIZE 80
 #define BUFFER_SIZE 15
 
-
-int n1, n2;
 char *sillyCh;
 int count = 0;
 pthread_mutex_t mutex;
@@ -42,7 +40,7 @@ const char * DIRECTORY_PATH = "/Users/Secondary/Desktop/CS4500/CS4500/proj_3/pro
     void *producer(const char* path);
 
     // Create a function as defined below for the consumer thread which reads sequentially from the queue and prints them in the same order.
-    void *consumer(void *sillyString);
+    void *consumer(void *parameter);
 
 // ~~~ // MAIN // ~~~ //
 
@@ -103,7 +101,7 @@ bool remove_from_buffer(char *item)
 // 333 // USER FUNCTION: producer // 333 //
 // Create a function as defined below for the producer thread which reads characters one by one from a string stored in a file, then writes sequentially these characters into a circular queue.
 void *producer(const char* path)
-{
+{   puts("PRODUCER BEGINNING");
     FILE *inPtr; //datastream to open
     inPtr = fopen( path, "r");
     if (inPtr == NULL)
@@ -134,12 +132,12 @@ void *producer(const char* path)
     } // end of if else
 
     fclose(inPtr); //close the file
-    pthread_exit(NULL);
+    return NULL;
 }
 
 // 444 // USER FUNCTION: consumer // 444 //
 // Create a function as defined below for the consumer thread which reads sequentially from the queue and prints them in the same order.
-void *consumer(void *sillyString)
+void *consumer(void *parameter)
 {
     while(TRUE)
     {
