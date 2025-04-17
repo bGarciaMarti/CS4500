@@ -17,16 +17,16 @@
 #define MAX_INPUT_BYTES 10240
 #define NUM_OF_THREADS 2
 #define PATH_SIZE 80
-#define BUFFER_SIZE 4
+#define BUFFER_SIZE 15
 
 
 int n1, n2;
-char *s1, *s2;
+char *sillyCh;
 int count = 0;
-pthread_mutex_t lock;
+pthread_mutex_t mutex;
 sem_t full, empty; // semaphores
 int sillyBuffer[BUFFER_SIZE];
-pthread_t threadid;
+pthread_t producer_thread, consumer_thread;
 pthread_attr_t attr; // set of thread attributes
 
 //file names and path
@@ -38,26 +38,21 @@ const char * DIRECTORY_PATH = "/Users/Secondary/Desktop/CS4500/CS4500/proj_3/pro
     // Create a function as defined below to get the file path for each file.Use strcpy and string strcat functions.
     void getFilePath(char* finalPath, const char* directoryPath, const char* fileName);
 
-    // Create a function as defined below that will open the file to read the words as a string then get each word and put it into the word type array. The function will return whether the file was opened successfully. Use strcpy and strtok.
-    bool getWordsFromFile(const char* path);
-
     // Create a function as defined below for the producer thread which reads characters one by one from a string stored in a file, then writes sequentially these characters into a circular queue.
-    void *producer(void *sillyString);
+    void *producer(const char* path);
 
-    // Create a function as defined below for the producer thread which reads characters one by one from a string stored in a file, then writes sequentially these characters into a circular queue.
+    // Create a function as defined below for the consumer thread which reads sequentially from the queue and prints them in the same order.
     void *consumer(void *sillyString);
 
 // ~~~ // MAIN // ~~~ //
 
 int main(void){
-    bool retrievedWords = false;
-    pthread_t threads[NUM_OF_THREADS];
-    
     // initaize data
-    pthread_mutex_init(&lock, NULL); //create the mutex lock
+    pthread_mutex_init(&mutex, NULL); //create the mutex lock
     sem_init(&full, 0, 0); // semaphore full to 0
     sem_init(&empty, 0, BUFFER_SIZE); // semaphore empty to 0
-    pthread_attr_init(&attr); // attributes
+    // pthread_attr_init(&attr); // attributes
+    
     
     // lengthArray replacement arrays to store the "finalPath" in getFilePath function
     char sillyString_filePath[PATH_SIZE] = { '\0' };
@@ -65,77 +60,103 @@ int main(void){
     // get the directory paths to the files
     getFilePath(sillyString_filePath, DIRECTORY_PATH, STRING_FILE);
 
-    // we need the strings from the files
-    retrievedWords = getWordsFromFile(sillyString_filePath);
-    if (retrievedWords == false) {
-        printf("%s", "ERROR: File could not be opened.\n");
-            return 0;
-        }
+    // we need the string from the files
+    // producer(sillyString_filePath);
     
-    // use pthread functions to divide up the task
-    for (int i = 0; i < NUM_OF_THREADS; i++) {
-        pthread_create(&threads[i], NULL, countSubstrings, (void *)(i * n1 / NUM_OF_THREADS));
-    }
-    for (int i = 0; i < NUM_OF_THREADS; i++) {
-        pthread_join(threads[i], NULL);
-    }
+    pthread_create(&producer_thread, NULL, producer(sillyString_filePath), NULL);
+    pthread_create(&consumer_thread, NULL, consumer, NULL);
     
-    printf("There are %d substrings of %s in the string %s", count, s2,s1);
+    // Wait until the threads are done
+    pthread_join(producer_thread, NULL);
+    pthread_join(consumer_thread, NULL);
     
-    // free the allocated memory after use
-    free(s1);
-    free(s2);
-    pthread_mutex_destroy(&lock);
     
     return 0;
 } // end main
 
-
-
-// 111 // USER FUNCTION: getWordsFromFile // 111 //
-// Create a function as defined below that will open the file to read the words as a string then get each word and put it into the word type array. The function will return whether the file was opened successfully. Use strcpy and strtok.
-bool getWordsFromFile(const char* path)
+// 111 // USER FUNCTION: insert // 111 //
+// Create a function as defined below too add an item into the buffer
+bool insert_into_buffer(char item)
 {
-    bool functioningFile = false;
-    
+    if (count < BUFFER_SIZE) {
+        sillyBuffer[count] = item;
+        count++;
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+// 222 // USER FUNCTION: remove // 222 //
+// Create a function as defined below too remove an item from the buffer
+bool remove_from_buffer(char *item)
+{
+    if (count > 0) {
+        *item = sillyBuffer[count-1];
+        count--;
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+// 333 // USER FUNCTION: producer // 333 //
+// Create a function as defined below for the producer thread which reads characters one by one from a string stored in a file, then writes sequentially these characters into a circular queue.
+void *producer(const char* path)
+{
     FILE *inPtr; //datastream to open
     inPtr = fopen( path, "r");
     if (inPtr == NULL)
-    {   
-        functioningFile = false;
+    {   printf("%s", "ERROR: File could not be opened.\n");
+        exit(1);
     } else {
-        functioningFile = true;
-        while (!feof(inPtr) && (s1 == NULL)) //while not the end of a file and while the s1 is empty
+        sillyCh = (char *)malloc(sizeof(char) * MAX_INPUT_BYTES);
+        if (sillyCh == NULL)
+        {   puts("ERROR: Out of memory");
+            exit(1);
+        }
+        while ((*sillyCh = fgetc(inPtr)) != EOF) //
         {
-            s1 = (char *)malloc(sizeof(char) * MAX_INPUT_BYTES);
-            if (s1 == NULL)
-            {   puts("ERROR: Out of memory");
-                exit(1);
-            }
-            s2 = (char *)malloc(sizeof(char) * MAX_INPUT_BYTES);
-            if (s2 == NULL)
-            {   puts("ERROR: Out of memory");
-                exit(1);
-            }
+            pthread_mutex_lock(&mutex); // retrieve the mutex lock to produce item
+            sem_wait(&empty); // retrieve the empty lock if the buffer has space
             
-            // read s1 and s2
-            s1 = fgets(s1, MAX_INPUT_BYTES, inPtr);
-            s2 = fgets(s2, MAX_INPUT_BYTES, inPtr);
-            n1 = (int)strlen(s1) - 1; // exclude /n
-            n2 = (int)strlen(s2) - 1; // exclude /n
-            
-            if (s1 == NULL || s2 == NULL || n1 < n2) // Assume that n1 is at least twice as long as n2.
-            {   puts("ERROR: strings s1, s2 or len(n1) len(n2)");
-                exit(1);
+            if (insert_into_buffer(*sillyCh)){
+                printf("producer produced %s\n", sillyCh);
+            } else {
+                fprintf(stderr, "WARNING: The buffer is full.\nSome items must be consumed before more production.\n");
+                pthread_mutex_unlock(&mutex);// release the mutex lock
+                sem_post(&full); // increment full
+                break;
             }
+            pthread_mutex_unlock(&mutex);// release the mutex lock
+            sem_post(&full); // increment full
         } // end of while not the end of a file
     } // end of if else
 
     fclose(inPtr); //close the file
-    return functioningFile;
+    pthread_exit(NULL);
 }
 
-// 222 // USER FUNCTION: getFilePath // 222 //
+// 444 // USER FUNCTION: consumer // 444 //
+// Create a function as defined below for the consumer thread which reads sequentially from the queue and prints them in the same order.
+void *consumer(void *sillyString)
+{
+    while(TRUE)
+    {
+        sem_wait(&full); // retrieve the full lock to see if the buffer has an item
+        pthread_mutex_lock(&mutex); // retrieve the mutex lock to consume item
+            
+        if(remove_from_buffer(sillyCh)){
+            printf("consumer consumed %s\n", sillyCh);
+        } else {
+            fprintf(stderr, "ERROR: Consumer couldn't consume.\n");
+        }
+        pthread_mutex_unlock(&mutex);// release the mutex lock
+        sem_post(&empty); // increment full
+    } // end of a forever loop
+}
+
+// 555 // USER FUNCTION: getFilePath // 555 //
 // Create a function as defined below to get the file path for each file. Use strcpy and string strcat functions.
 void getFilePath(char * finalPath, const char* directoryPath, const char* fileName)
 {
@@ -144,27 +165,4 @@ void getFilePath(char * finalPath, const char* directoryPath, const char* fileNa
     // printf("The path is %s", finalPath); //TESTING
     return;
 }
-
-// 333 // USER FUNCTION: producer // 333 //
-// Create a function as defined below for the producer thread which reads characters one by one from a string stored in a file, then writes sequentially these characters into a circular queue.
-void *producer(void *sillyStringCount) {
-    int element;
-    
-    element = rand();
-    
-    // Assume that n1 is at least twice as long as n2
-    // indexStart = sillyStringCount * ( n1 / NUM_OF_THREADS);
-    // indexEnd = start + (n1 / NUM_OF_THREADS);
-    
-    for (int i = (int)sillyStringCount; i < (int)sillyStringCount + n1 / NUM_OF_THREADS; i++)
-    {
-        if(!strncmp(s1 + i, s2, n2)) {
-            pthread_mutex_lock(&lock);
-            count++;
-            pthread_mutex_unlock(&lock);
-        }
-    }
-    return NULL;
-}
-
 
