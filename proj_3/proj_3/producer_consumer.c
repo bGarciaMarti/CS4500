@@ -113,24 +113,21 @@ void *producer(const char* path)
         {   puts("ERROR: Out of memory");
             exit(1);
         }
+        pthread_mutex_lock(&mutex); // retrieve the mutex lock to produce item
         while ((*sillyCh = fgetc(inPtr)) != EOF) //
         {
-            pthread_mutex_lock(&mutex); // retrieve the mutex lock to produce item
             sem_wait(&empty); // retrieve the empty lock if the buffer has space
             
             if (insert_into_buffer(*sillyCh)){
                 printf("producer produced %s\n", sillyCh);
             } else {
                 fprintf(stderr, "WARNING: The buffer is full.\nSome items must be consumed before more production.\n");
-                pthread_mutex_unlock(&mutex);// release the mutex lock
-                sem_post(&full); // increment full
                 break;
             }
-            pthread_mutex_unlock(&mutex);// release the mutex lock
-            sem_post(&full); // increment full
         } // end of while not the end of a file
     } // end of if else
-
+    pthread_mutex_unlock(&mutex);// release the mutex lock
+    sem_post(&full); // increment full
     fclose(inPtr); //close the file
     return NULL;
 }
@@ -138,20 +135,22 @@ void *producer(const char* path)
 // 444 // USER FUNCTION: consumer // 444 //
 // Create a function as defined below for the consumer thread which reads sequentially from the queue and prints them in the same order.
 void *consumer(void *parameter)
-{
+{   puts("CONSUMER BEGINNING");
+    pthread_mutex_lock(&mutex); // retrieve the mutex lock to consume item
     while(TRUE)
     {
         sem_wait(&full); // retrieve the full lock to see if the buffer has an item
-        pthread_mutex_lock(&mutex); // retrieve the mutex lock to consume item
             
         if(remove_from_buffer(sillyCh)){
             printf("consumer consumed %s\n", sillyCh);
         } else {
             fprintf(stderr, "ERROR: Consumer couldn't consume.\n");
+            break;
         }
-        pthread_mutex_unlock(&mutex);// release the mutex lock
-        sem_post(&empty); // increment full
     } // end of a forever loop
+    pthread_mutex_unlock(&mutex);// release the mutex lock
+    sem_post(&empty); // increment empty
+    return NULL;
 }
 
 // 555 // USER FUNCTION: getFilePath // 555 //
