@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB06A8742DAF563F005A263F /* producer_consumer.c in Sources */ = {isa = PBXBuildFile; fileRef = DB06A8732DAF563F005A263F /* producer_consumer.c */; };
+		DBCD76D62DB43B1000A794E3 /* my_list-forming.c in Sources */ = {isa = PBXBuildFile; fileRef = DBCD76D52DB43B1000A794E3 /* my_list-forming.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +23,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DB06A8732DAF563F005A263F /* producer_consumer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = producer_consumer.c; sourceTree = "<group>"; };
 		DBC70DC42DA60C97006CF3E3 /* proj_3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = proj_3; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCD76D52DB43B1000A794E3 /* my_list-forming.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "my_list-forming.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		DBC70DC62DA60C97006CF3E3 /* proj_3 */ = {
 			isa = PBXGroup;
 			children = (
-				DB06A8732DAF563F005A263F /* producer_consumer.c */,
+				DBCD76D52DB43B1000A794E3 /* my_list-forming.c */,
 			);
 			path = proj_3;
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB06A8742DAF563F005A263F /* producer_consumer.c in Sources */,
+				DBCD76D62DB43B1000A794E3 /* my_list-forming.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
